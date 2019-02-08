@@ -2,6 +2,7 @@
 <app-layout [isMobile]='isMobile$ | async' [showSidenav]='showSidenav$ | async'
             (openedChangeSidenav)="openedChangeSidenav($event)">
   <div sidenav>
+    <app-user-sidenav-card></app-user-sidenav-card>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/']">
         <h4 mat-line>Home</h4>
