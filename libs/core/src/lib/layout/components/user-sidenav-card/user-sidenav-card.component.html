@@ -2,7 +2,7 @@
 
 <div matRipple class="user-sidenav-card">
   <div class="picture">
-    <img class="img-fluid" src="https://picsum.photos/130/130?image=1027">
+    <img class="img-fluid" [src]="user?.pictureUrl || 'http://blog.ubeeqo.co.uk/images/users/default_user.png'">
   </div>
-  <h3 class="mat-h3">Michele Miller</h3>
+  <h3 class="mat-h3">{{user?.name || '...'}}</h3>
 </div>
