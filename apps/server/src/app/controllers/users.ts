@@ -20,13 +20,20 @@ usersRouter.get('/me', authenticate(), async (req: Request, res: Response) => {
 });
 
 usersRouter.put('/', async (req: Request, res: Response) => {
-  const userFromToken: UserFromToken = req.user;
-  try {
-    const user: User = await upsertUser(userFromToken);
-  } catch (err) {
-    console.log(err);
-  }
+  const userFromToken: UserFromToken = req.body;
+  const usr: User = await updateUser(userFromToken);
+  res.send(usr);
 });
+
+async function updateUser(userFromToken: UserFromToken) {
+  const user: User = await UserContext.findById(userFromToken._id).lean();
+  try {
+    const newUser = await UserContext.findByIdAndUpdate(user._id, userFromToken);
+    return newUser;
+  } catch (err) {
+    return err;
+  }
+}
 
 async function upsertUser(userFromToken: UserFromToken): Promise<User> {
   const user: User = await UserContext.findById(userFromToken._id).lean();
